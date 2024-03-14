@@ -46,6 +46,19 @@ public class AddressBookMenuContributor : IMenuContributor
         administration.SetSubItemOrder(IdentityMenuNames.GroupName, 2);
         administration.SetSubItemOrder(SettingManagementMenuNames.GroupName, 3);
 
+        context.Menu.AddItem(
+            new ApplicationMenuItem(
+                "AddressBook",
+                l["Menu:AddressBook"],
+                icon: "fa-solid fa-map-location-dot"
+            ).AddItem(
+                new ApplicationMenuItem(
+                    "AddressBook.Locations",
+                    l["Menu:Locations"],
+                    url: "/Locations"
+                    ))
+            );
+
         return Task.CompletedTask;
     }
 }

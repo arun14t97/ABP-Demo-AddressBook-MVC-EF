@@ -1,0 +1,27 @@
+﻿@page
+@model AddressBook.Web.Pages.Locations.IndexModel
+@using AddressBook.Localization
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<AddressBookResource> L
+@section scripts
+{
+   <abp-script src="/Pages/Locations/Index.js"/>
+}
+<abp-card>
+    <abp-card-header>
+        <abp-row>
+            <abp-column size-md="_6">
+                <abp-card-title>@L["Locations"]</abp-card-title>
+            </abp-column>
+            <abp-column size-md="_6" class="text-end">
+                <abp-button id="NewLocationButton"
+                            text="@L["NewLocation"].Value"
+                            icon="plus"
+                            button-type="Primary" />
+            </abp-column>
+        </abp-row>
+    </abp-card-header>
+    <abp-card-body>
+        <abp-table striped-rows="true" id="LocationsTable"></abp-table>
+    </abp-card-body>
+</abp-card>

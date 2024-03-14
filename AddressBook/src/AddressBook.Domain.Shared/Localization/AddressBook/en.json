@@ -3,6 +3,28 @@
   "texts": {
     "Menu:Home": "Home",
     "Welcome": "Welcome",
-    "LongWelcomeMessage": "Welcome to the application. This is a startup project based on the ABP framework. For more information, visit abp.io."
+    "LongWelcomeMessage": "Welcome to the application. This is a startup project based on the ABP framework. For more information, visit abp.io.",
+    "Menu:AddressBook": "AddressBook",
+    "Menu:Locations": "Locations",
+    "Actions": "Actions",
+    "Close": "Close",
+    "Delete": "Delete",
+    "Edit": "Edit",
+    "Address": "Address",
+    "NewLocation": "New Location",
+    "Name": "Name",
+    "Latitude": "Latitude",
+    "Longitude": "Longitude",
+    "AreYouSure": "Are you sure?",
+    "AreYouSureToDelete": "Are you sure you want to delete this item?",
+    "Enum:AddressLoco.0": "Undefined",
+    "Enum:AddressLoco.1": "India",
+    "Enum:AddressLoco.2": "China",
+    "Enum:AddressLoco.3": "America",
+    "Enum:AddressLoco.4": "Russia",
+    "Enum:AddressLoco.5": "Austria",
+    "LocationDeletionConfirmationMessage": "Are you sure to delete the location '{0}'?",
+    "SuccessfullyDeleted": "Successfully deleted!"
+
   }
 }
