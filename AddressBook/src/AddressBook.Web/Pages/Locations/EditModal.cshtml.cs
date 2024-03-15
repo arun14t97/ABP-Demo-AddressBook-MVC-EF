@@ -1,37 +1,36 @@
 using System;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 using AddressBook.Locations;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+using AutoMapper.Internal.Mappers;
+using Microsoft.AspNetCore.Mvc;
 
-namespace AddressBook.Web.Pages.Locations
+namespace AddressBook.Web.Pages.Locations;
+
+public class EditModalModel : AddressBookPageModel
 {
-    public class EditModalModel : AddressBookPageModel
+    [HiddenInput]
+    [BindProperty(SupportsGet = true)]
+    public Guid Id { get; set; }
+
+    [BindProperty]
+    public CreateUpdateLocationDto Location { get; set; }
+
+    private readonly ILocationAppService _locationAppService;
+
+    public EditModalModel(ILocationAppService locationAppService)
     {
-        [HiddenInput]
-        [BindProperty(SupportsGet = true)]
-        public Guid Id { get; set; }
+        _locationAppService = locationAppService;
+    }
 
-        [BindProperty]
-        public CreateUpdateLocationDto Location { get; set; }
+    public async Task OnGetAsync()
+    {
+        var locationDto = await _locationAppService.GetAsync(Id);
+        Location = ObjectMapper.Map<LocationDto, CreateUpdateLocationDto>(locationDto);
+    }
 
-        private readonly ILocationAppService _locationAppService;
-
-        public EditModalModel(ILocationAppService locationAppService)
-        {
-            _locationAppService = locationAppService;
-        }
-
-        public async Task OnGetAsync()
-        {
-            var locationDto = await _locationAppService.GetAsync(Id);
-            Location = ObjectMapper.Map<LocationDto, CreateUpdateLocationDto>(locationDto);
-        }
-
-        public async Task<IActionResult> OnPostAsync()
-        {
-            await _locationAppService.UpdateAsync(Id, Location);
-            return NoContent();
-        }
+    public async Task<IActionResult> OnPostAsync()
+    {
+        await _locationAppService.UpdateAsync(Id, Location);
+        return NoContent();
     }
 }

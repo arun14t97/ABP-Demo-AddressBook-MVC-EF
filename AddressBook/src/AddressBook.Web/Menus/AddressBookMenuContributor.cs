@@ -1,6 +1,8 @@
 ﻿using System.Threading.Tasks;
 using AddressBook.Localization;
 using AddressBook.MultiTenancy;
+using AddressBook.Permissions;
+using Volo.Abp.Authorization.Permissions;
 using Volo.Abp.Identity.Web.Navigation;
 using Volo.Abp.SettingManagement.Web.Navigation;
 using Volo.Abp.TenantManagement.Web.Navigation;
@@ -47,17 +49,26 @@ public class AddressBookMenuContributor : IMenuContributor
         administration.SetSubItemOrder(SettingManagementMenuNames.GroupName, 3);
 
         context.Menu.AddItem(
-            new ApplicationMenuItem(
-                "AddressBook",
-                l["Menu:AddressBook"],
-                icon: "fa-solid fa-map-location-dot"
-            ).AddItem(
-                new ApplicationMenuItem(
-                    "AddressBook.Locations",
-                    l["Menu:Locations"],
-                    url: "/Locations"
-                    ))
-            );
+     new ApplicationMenuItem(
+         "AddressBook",
+         l["Menu:AddressBook"],
+         icon: "fa fa-book"
+     ).AddItem(
+         new ApplicationMenuItem(
+             "AddressBook.Locations",
+             l["Menu:Locations"],
+             url: "/Locations"
+         ).RequirePermissions(AddressBookPermissions.Locations.Default) // Check the permission!
+     ).AddItem( // ADDED THE NEW "ADDRESS" MENU ITEM UNDER THE "ADDRESS BOOK" MENU
+        new ApplicationMenuItem(
+            "AddressBook.AddressF",
+            l["Menu:AddressF"],
+            url: "/AddressF"
+        ).RequirePermissions(AddressBookPermissions.AddressF.Default)
+    )
+ );
+
+
 
         return Task.CompletedTask;
     }

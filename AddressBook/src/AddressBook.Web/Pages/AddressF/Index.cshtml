@@ -1,35 +1,37 @@
 ﻿@page
 @using AddressBook.Localization
 @using AddressBook.Permissions
-@using AddressBook.Web.Pages.Locations
+@using AddressBook.Web.Pages.AddressF
 @using Microsoft.AspNetCore.Authorization
 @using Microsoft.Extensions.Localization
-@model IndexModel
 @inject IStringLocalizer<AddressBookResource> L
 @inject IAuthorizationService AuthorizationService
+@model IndexModel
+
 @section scripts
 {
-    <abp-script src="/Pages/Locations/Index.js" />
+    <abp-script src="/Pages/AddressF/Index.js"/>
 }
 
 <abp-card>
     <abp-card-header>
         <abp-row>
             <abp-column size-md="_6">
-                <abp-card-title>@L["Locations"]</abp-card-title>
+                <abp-card-title>@L["AddressF"]</abp-card-title>
             </abp-column>
             <abp-column size-md="_6" class="text-end">
-                @if (await AuthorizationService.IsGrantedAsync(AddressBookPermissions.Locations.Create))
+                @if (await AuthorizationService
+                    .IsGrantedAsync(AddressBookPermissions.AddressF.Create))
                 {
-                    <abp-button id="NewLocationButton"
-                                text="@L["NewLocation"].Value"
+                    <abp-button id="NewAddressButton"
+                                text="@L["NewAddress"].Value"
                                 icon="plus"
-                                button-type="Primary" />
+                                button-type="Primary"/>
                 }
             </abp-column>
         </abp-row>
     </abp-card-header>
     <abp-card-body>
-        <abp-table striped-rows="true" id="LocationsTable"></abp-table>
+        <abp-table striped-rows="true" id="AddressFTable"></abp-table>
     </abp-card-body>
 </abp-card>

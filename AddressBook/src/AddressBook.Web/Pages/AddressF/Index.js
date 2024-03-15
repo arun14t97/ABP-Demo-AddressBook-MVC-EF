@@ -1,16 +1,16 @@
 ﻿$(function () {
     var l = abp.localization.getResource('AddressBook');
-    var createModal = new abp.ModalManager(abp.appPath + 'Locations/CreateModal');
-    var editModal = new abp.ModalManager(abp.appPath + 'Locations/EditModal');
+    var createModal = new abp.ModalManager(abp.appPath + 'AddressF/CreateModal');
+    var editModal = new abp.ModalManager(abp.appPath + 'AddressF/EditModal');
 
-    var dataTable = $('#LocationsTable').DataTable(
+    var dataTable = $('#AddressFTable').DataTable(
         abp.libs.datatables.normalizeConfiguration({
             serverSide: true,
             paging: true,
             order: [[1, "asc"]],
             searching: false,
             scrollX: true,
-            ajax: abp.libs.datatables.createAjax(addressBook.locations.location.getList),
+            ajax: abp.libs.datatables.createAjax(addressBook.addressF.address.getList),
             columnDefs: [
                 {
                     title: l('Actions'),
@@ -19,24 +19,26 @@
                             [
                                 {
                                     text: l('Edit'),
-                                    visible: abp.auth.isGranted('AddressBook.Locations.Edit'), //CHECK for the PERMISSION
+                                    visible: 
+                                        abp.auth.isGranted('AddressBook.AddressF.Edit'),
                                     action: function (data) {
                                         editModal.open({ id: data.record.id });
                                     }
                                 },
                                 {
                                     text: l('Delete'),
-                                    visible: abp.auth.isGranted('AddressBook.Locations.Delete'), //CHECK for the PERMISSION
+                                    visible: 
+                                        abp.auth.isGranted('AddressBook.AddressF.Delete'),
                                     confirmMessage: function (data) {
                                         return l(
-                                            'LocationDeletionConfirmationMessage',
+                                            'AddressDeletionConfirmationMessage',
                                             data.record.name
                                         );
                                     },
                                     action: function (data) {
-                                        addressBook.locations.location
+                                        addressBook.addressF.address
                                             .delete(data.record.id)
-                                            .then(function () {
+                                            .then(function() {
                                                 abp.notify.info(
                                                     l('SuccessfullyDeleted')
                                                 );
@@ -48,28 +50,26 @@
                     }
                 },
                 {
-                    title: l('Name'),
-                    data: "name"
+                    title: l('Street'),
+                    data: "street"
                 },
                 {
-                    title: l('Address'),
-                    data: "address",
-                    render: function (data) {
-                        return l('Enum:AddressLoco.' + data);
-                    }
-                },
-                {
-                    title: l('Latitude'),
-                    data: "latitude",
-                    
-                },
-                {
-                    title: l('Longitude'),
-                    data: "longitude",
-                    
+                    title: l('City'),
+                    data: "city",
                    
                 },
-                
+                {
+                    title: l('State'),
+                    data: "state"
+                },
+                {
+                    title: l('PostalCode'),
+                    data: "postalCode"
+                },
+                {
+                    title: l('Country'),
+                    data: "country"
+                }
             ]
         })
     );
@@ -82,7 +82,7 @@
         dataTable.ajax.reload();
     });
 
-    $('#NewLocationButton').click(function (e) {
+    $('#NewAddressButton').click(function (e) {
         e.preventDefault();
         createModal.open();
     });

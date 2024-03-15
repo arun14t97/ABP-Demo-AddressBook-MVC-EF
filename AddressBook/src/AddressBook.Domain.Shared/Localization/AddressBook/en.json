@@ -5,7 +5,7 @@
     "Welcome": "Welcome",
     "LongWelcomeMessage": "Welcome to the application. This is a startup project based on the ABP framework. For more information, visit abp.io.",
     "Menu:AddressBook": "AddressBook",
-    "Menu:Locations": "Locations",
+    "Menu:Locations": "Location",
     "Actions": "Actions",
     "Close": "Close",
     "Delete": "Delete",
@@ -24,7 +24,26 @@
     "Enum:AddressLoco.4": "Russia",
     "Enum:AddressLoco.5": "Austria",
     "LocationDeletionConfirmationMessage": "Are you sure to delete the location '{0}'?",
-    "SuccessfullyDeleted": "Successfully deleted!"
+    "SuccessfullyDeleted": "Successfully deleted!",
+    "Permission:AddressBook": "AddressBook",
+    "Permission:Locations": "Location Management",
+    "Permission:Locations.Create": "Creating new location",
+    "Permission:Locations.Edit": "Editing the location",
+    "Permission:Locations.Delete": "Deleting the location",
+    "AddressBook:00001": "There is already an address with the same country: {country}",
+    "Permission:AddressF": "Address Management",
+    "Permission:AddressF.Create": "Creating new address",
+    "Permission:AddressF.Edit": "Editing the address",
+    "Permission:AddressF.Delete": "Deleting the address",
+    "Menu:AddressF": "Address",
+    "AddressF": "Address",
+    "AddressDeletionConfirmationMessage": "Are you sure to delete the address '{0}'?",
+    "Street": "Street",
+    "City": "City",
+    "State": "State",
+    "PostalCode": "PostalCode",
+    "Country": "Country",
+    "NewAddress": "New Address"
 
   }
 }

@@ -14,8 +14,9 @@ namespace AddressBook.Locations
         public string Name { get; set; }
         public AddressLoco Address { get; set; }
 
-       
+        public Guid AddressId { get; set; }
+
     }
-    
+
 
 }

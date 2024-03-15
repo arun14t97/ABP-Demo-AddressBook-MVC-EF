@@ -1,4 +1,5 @@
-﻿using AddressBook.Locations;
+﻿using AddressBook.AddressF;
+using AddressBook.Locations;
 using AutoMapper;
 
 namespace AddressBook;
@@ -12,5 +13,6 @@ public class AddressBookApplicationAutoMapperProfile : Profile
          * into multiple profile classes for a better organization. */
         CreateMap <Location, LocationDto> ();
         CreateMap <CreateUpdateLocationDto, Location> ();
+        CreateMap<Address, AddressDto>();
     }
 }

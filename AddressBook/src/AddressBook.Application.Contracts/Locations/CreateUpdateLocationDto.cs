@@ -7,6 +7,7 @@ namespace AddressBook.Locations
 {
     public class CreateUpdateLocationDto
     {
+        public Guid AddressId { get; set; }
         [Required]
         [StringLength(128)]
         public double Latitude { get; set; }

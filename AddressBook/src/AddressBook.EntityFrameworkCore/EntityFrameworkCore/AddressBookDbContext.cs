@@ -1,5 +1,7 @@
-﻿using AddressBook.Locations;
+﻿using AddressBook.AddressF;
+using AddressBook.Locations;
 using Microsoft.EntityFrameworkCore;
+using System;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
 using Volo.Abp.Data;
@@ -27,6 +29,7 @@ public class AddressBookDbContext :
 {
     /* Add DbSet properties for your Aggregate Roots / Entities here. */
     public DbSet <Location> Locations { get; set; }
+    public DbSet <Address> AddressF {  get; set; }
     #region Entities from the modules
 
     /* Notice: We only implemented IIdentityDbContext and ITenantManagementDbContext
@@ -88,6 +91,21 @@ public class AddressBookDbContext :
             l.ToTable(AddressBookConsts.DbTablePrefix + "Locations", AddressBookConsts.DbSchema);
             l.ConfigureByConvention();
             l.Property(x => x.Name).IsRequired().HasMaxLength(128);
+            // ADD THE MAPPING FOR THE RELATION
+            l.HasOne<Address>().WithMany().HasForeignKey(x => x.AddressId).IsRequired();
+        });
+
+        builder.Entity<Address>(a =>
+        {
+            a.ToTable(AddressBookConsts.DbTablePrefix + "AddressF",
+                AddressBookConsts.DbSchema);
+
+            a.ConfigureByConvention();
+
+            a.Property(x => x.Country).IsRequired()
+                .HasMaxLength(AddressConsts.MaxNameLength);
+
+            a.HasIndex(x => x.Country);
         });
     }
 }

@@ -39,6 +39,8 @@ using Volo.Abp.UI.Navigation.Urls;
 using Volo.Abp.UI;
 using Volo.Abp.UI.Navigation;
 using Volo.Abp.VirtualFileSystem;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using AddressBook.Permissions;
 
 namespace AddressBook.Web;
 
@@ -111,6 +113,14 @@ public class AddressBookWebModule : AbpModule
         ConfigureNavigationServices();
         ConfigureAutoApiControllers();
         ConfigureSwaggerServices(context.Services);
+
+        Configure<RazorPagesOptions>(options =>
+        {
+            options.Conventions.AuthorizePage("/Locations/Index", AddressBookPermissions.Locations.Default);
+            options.Conventions.AuthorizePage("/Locations/CreateModal", AddressBookPermissions.Locations.Create);
+            options.Conventions.AuthorizePage("/Locations/EditModal", AddressBookPermissions.Locations.Edit);
+        });
+
     }
 
     private void ConfigureAuthentication(ServiceConfigurationContext context)
