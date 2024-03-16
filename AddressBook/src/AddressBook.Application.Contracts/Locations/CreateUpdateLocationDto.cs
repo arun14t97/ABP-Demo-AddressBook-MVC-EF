@@ -17,5 +17,7 @@ namespace AddressBook.Locations
         public string Name { get; set; } = string.Empty;
         [Required]
         public AddressLoco Address { get; set; } = AddressLoco.Undefined;
+
+       
     }
 }

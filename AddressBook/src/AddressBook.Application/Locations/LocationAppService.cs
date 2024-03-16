@@ -79,29 +79,29 @@ namespace AddressBook.Locations
             //Execute the query and get a list
             var queryResult = await AsyncExecuter.ToListAsync(query);
 
-            //Convert the query result to a list of BookDto objects
-            var bookDtos = queryResult.Select(x =>
+            //Convert the query result to a list of LocationDto objects
+            var locationDtos = queryResult.Select(x =>
             {
-                var bookDto = ObjectMapper.Map<Book, BookDto>(x.book);
-                bookDto.AuthorName = x.author.Name;
-                return bookDto;
+                var locationDto = ObjectMapper.Map<Location, LocationDto>(x.location);
+                locationDto.AddressCountry = x.address.Country;
+                return locationDto;
             }).ToList();
 
             //Get the total count with another query
             var totalCount = await Repository.GetCountAsync();
 
-            return new PagedResultDto<BookDto>(
+            return new PagedResultDto<LocationDto>(
                 totalCount,
-                bookDtos
+                locationDtos
             );
         }
 
-        public async Task<ListResultDto<AuthorLookupDto>> GetAuthorLookupAsync()
+        public async Task<ListResultDto<AddressLookupDto>> GetAddressLookupAsync()
         {
-            var authors = await _authorRepository.GetListAsync();
+            var addressF = await _addressRepository.GetListAsync();
 
-            return new ListResultDto<AuthorLookupDto>(
-                ObjectMapper.Map<List<Author>, List<AuthorLookupDto>>(authors)
+            return new ListResultDto<AddressLookupDto>(
+                ObjectMapper.Map<List<Address>, List<AddressLookupDto>>(addressF)
             );
         }
 
@@ -109,19 +109,19 @@ namespace AddressBook.Locations
         {
             if (sorting.IsNullOrEmpty())
             {
-                return $"book.{nameof(Book.Name)}";
+                return $"location.{nameof(Location.Name)}";
             }
 
-            if (sorting.Contains("authorName", StringComparison.OrdinalIgnoreCase))
+            if (sorting.Contains("addressCountry", StringComparison.OrdinalIgnoreCase))
             {
                 return sorting.Replace(
-                    "authorName",
-                    "author.Name",
+                    "addressCountry",
+                    "address.Country",
                     StringComparison.OrdinalIgnoreCase
                 );
             }
 
-            return $"book.{sorting}";
+            return $"location.{sorting}";
         }
     }
 }

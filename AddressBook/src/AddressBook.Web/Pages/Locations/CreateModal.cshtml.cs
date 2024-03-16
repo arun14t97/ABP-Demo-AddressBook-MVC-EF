@@ -1,6 +1,16 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Threading.Tasks;
 using AddressBook.Locations;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Form;
+using Volo.Abp.ObjectMapping;
+using AutoMapper.Internal.Mappers;
+
 
 namespace AddressBook.Web.Pages.Locations
 {
@@ -9,6 +19,8 @@ namespace AddressBook.Web.Pages.Locations
         [BindProperty]
         public CreateUpdateLocationDto Location { get; set; }
 
+        public List<SelectListItem> AddressF { get; set; }
+
         private readonly ILocationAppService _locationAppService;
 
         public CreateModalModel(ILocationAppService locationAppService)
@@ -16,15 +28,45 @@ namespace AddressBook.Web.Pages.Locations
             _locationAppService = locationAppService;
         }
 
-        public void OnGet()
+        public async Task OnGetAsync()
         {
-            Location = new CreateUpdateLocationDto();
+            Location = new CreateLocationViewModel();
+
+            var addressLookup = await _locationAppService.GetAddressLookupAsync();
+            AddressF = addressLookup.Items
+                .Select(x => new SelectListItem(x.Country, x.Id.ToString()))
+                .ToList();
         }
 
         public async Task<IActionResult> OnPostAsync()
         {
-            await _locationAppService.CreateAsync(Location);
+            await _locationAppService.CreateAsync(
+                ObjectMapper.Map<CreateLocationViewModel, CreateUpdateLocationDto>(Location)
+                );
             return NoContent();
+        }
+
+        public class CreateLocationViewModel
+        {
+            [SelectItems(nameof(AddressF))]
+            [DisplayName("Address")]
+            public Guid AddressId { get; set; }
+
+            [Required]
+            public double Latitude { get; set; }
+
+            [Required]
+            public double Longitude { get; set; }
+
+            [Required]
+            [StringLength(128)]
+            public string Name { get; set; } = string.Empty;
+
+            [Required]
+            public AddressLoco Address { get; set; } = AddressLoco.Undefined;
+
+            
+
         }
     }
 }

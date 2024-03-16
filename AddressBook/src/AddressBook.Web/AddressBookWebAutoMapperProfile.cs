@@ -17,5 +17,10 @@ public class AddressBookWebAutoMapperProfile : Profile
         CreateMap<AddressDto, Pages.AddressF.EditModalModel.EditAddressViewModel>();
         CreateMap<Pages.AddressF.EditModalModel.EditAddressViewModel,
                     UpdateAddressDto>();
+
+        CreateMap<Pages.Locations.CreateModalModel.CreateLocationViewModel, CreateUpdateLocationDto>();
+        CreateMap<LocationDto, Pages.Locations.EditModalModel.EditLocationViewModel>();
+        CreateMap<Pages.Locations.EditModalModel.EditLocationViewModel, CreateUpdateLocationDto>();
+
     }
 }

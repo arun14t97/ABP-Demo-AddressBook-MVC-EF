@@ -69,6 +69,12 @@
                     
                    
                 },
+                // ADDED the NEW Address Country COLUMN
+                {
+                    title: l('Address'),
+                    data: "addressCountry"
+                },
+
                 
             ]
         })
