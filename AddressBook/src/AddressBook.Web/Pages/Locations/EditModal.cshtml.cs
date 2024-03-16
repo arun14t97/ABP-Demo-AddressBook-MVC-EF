@@ -48,6 +48,10 @@ public class EditModalModel : AddressBookPageModel
         [HiddenInput]
         public Guid Id { get; set; }
 
+        [SelectItems(nameof(AddressF))]
+        [DisplayName("Address")]
+        public Guid AddressId { get; set; }
+
         [Required]
         public double Latitude { get; set; }
 
@@ -61,8 +65,6 @@ public class EditModalModel : AddressBookPageModel
         [Required]
         public AddressLoco Address { get; set; } = AddressLoco.Undefined;
 
-        [SelectItems(nameof(AddressF))]
-        [DisplayName("Address")]
-        public Guid AddressId { get; set; }
+        
     } 
     }

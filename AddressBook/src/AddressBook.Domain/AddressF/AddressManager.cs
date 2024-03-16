@@ -22,7 +22,7 @@ namespace AddressBook.AddressF
             string city,
             string state,
             string postalCode,
-            string country)
+            string ? country = null)
         {
             Check.NotNullOrWhiteSpace(country, nameof(country));
             var existingAddress = await _addressRepository.FindByNameAsync(country);

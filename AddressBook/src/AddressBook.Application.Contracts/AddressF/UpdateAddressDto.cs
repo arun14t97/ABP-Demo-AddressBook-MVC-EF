@@ -17,6 +17,6 @@ namespace AddressBook.AddressF
         [Required]
         public string PostalCode { get; set; }
         [Required]
-        public string Country { get; set; } = string.Empty;
+        public string? Country { get; set; } = string.Empty;
     }
 }

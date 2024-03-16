@@ -43,7 +43,6 @@ public class EditModalModel : AddressBookPageModel
 
         [Required]
         [StringLength(AddressConsts.MaxNameLength)]
-
         public string Street { get; set; }
         [Required]
         [StringLength(AddressConsts.MaxNameLength)]
@@ -56,6 +55,6 @@ public class EditModalModel : AddressBookPageModel
         public string PostalCode { get; set; }
         [Required]
         [StringLength(AddressConsts.MaxNameLength)]
-        public string Country { get; set; } = string.Empty;
+        public string? Country { get; set; } = string.Empty;
     }
 }

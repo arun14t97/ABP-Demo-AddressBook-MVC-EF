@@ -15,7 +15,7 @@ namespace AddressBook.AddressF
         public string City { get; set; }
         public string State { get; set; }
         public string PostalCode { get; set; }
-        public string Country { get; set; }
+        public string Country { get; private set; }
 
 
         private Address()
@@ -29,14 +29,14 @@ namespace AddressBook.AddressF
             string city,
             string state,
             string postalCode,
-            string country)
+            string? country= null)
             :base(id)
         {
             Street = street;
             City = city;
             State = state;
             PostalCode = postalCode;
-            Country = country;
+            SetCountry(country);
         }
 
         internal Address ChangeCountry(string country)

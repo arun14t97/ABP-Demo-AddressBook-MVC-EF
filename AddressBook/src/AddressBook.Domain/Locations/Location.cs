@@ -9,12 +9,13 @@ namespace AddressBook.Locations
 {
     public class Location : AuditedAggregateRoot<Guid>
     {
+        public Guid AddressId { get; set; }
         public double Latitude { get; set; }
         public double Longitude { get; set; }
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
         public AddressLoco Address { get; set; }
 
-        public Guid AddressId { get; set; }
+       
 
     }
 

@@ -7,6 +7,6 @@ namespace AddressBook.Locations
 {
     public class AddressLookupDto : EntityDto<Guid>
     {
-        public string Country { get; set; }
+        public string Country { get; set; } = string.Empty;
     }
 }
