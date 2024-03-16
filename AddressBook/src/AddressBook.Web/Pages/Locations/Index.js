@@ -74,7 +74,22 @@
                     title: l('Address'),
                     data: "addressCountry"
                 },
-
+                {
+                    title: l('Address'),
+                    data: "addressStreet"
+                },
+                {
+                    title: l('Address'),
+                    data: "addressCity"
+                },
+                {
+                    title: l('Address'),
+                    data: "addressState"
+                },
+                {
+                    title: l('Address'),
+                    data: "addressPostalCode"
+                },
                 
             ]
         })

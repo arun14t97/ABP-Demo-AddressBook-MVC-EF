@@ -17,7 +17,11 @@ public class CreateModalModel : AddressBookPageModel
     [BindProperty]
     public CreateLocationViewModel Location { get; set; }
 
-    public List<SelectListItem> AddressF { get; set; }
+    public List<SelectListItem> AddressFCountry { get; set; }
+    public List<SelectListItem> AddressFStreet { get; set; }
+    public List<SelectListItem> AddressFCity { get; set; }
+    public List<SelectListItem> AddressFState { get; set; }
+    public List<SelectListItem> AddressFPostalCode { get; set; }
 
     private readonly ILocationAppService _locationAppService;
 
@@ -32,8 +36,20 @@ public class CreateModalModel : AddressBookPageModel
         Location = new CreateLocationViewModel();
 
         var addressLookup = await _locationAppService.GetAddressLookupAsync();
-        AddressF = addressLookup.Items
+        AddressFCountry = addressLookup.Items
             .Select(x => new SelectListItem(x.Country, x.Id.ToString()))
+            .ToList();
+        AddressFStreet = addressLookup.Items
+            .Select(x => new SelectListItem(x.Street, x.Id.ToString()))
+            .ToList();
+        AddressFCity = addressLookup.Items
+            .Select(x => new SelectListItem(x.City, x.Id.ToString()))
+            .ToList();
+        AddressFState = addressLookup.Items
+            .Select(x => new SelectListItem(x.State, x.Id.ToString()))
+            .ToList();
+        AddressFPostalCode = addressLookup.Items
+            .Select(x => new SelectListItem(x.PostalCode, x.Id.ToString()))
             .ToList();
     }
 
@@ -47,8 +63,10 @@ public class CreateModalModel : AddressBookPageModel
 
     public class CreateLocationViewModel
     {
-        [SelectItems(nameof(AddressF))]
-        [DisplayName("Address")]
+
+        [SelectItems(nameof(AddressFCountry))]
+        [DisplayName("Country")]
+
         public Guid AddressId { get; set; }
 
         [Required]
@@ -65,4 +83,5 @@ public class CreateModalModel : AddressBookPageModel
         public AddressLoco Address { get; set; } = AddressLoco.Undefined;
 
     }
+
 }

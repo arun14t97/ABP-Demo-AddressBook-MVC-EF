@@ -57,6 +57,10 @@ namespace AddressBook.Locations
 
             var locationDto = ObjectMapper.Map<Location, LocationDto>(queryResult.location);
             locationDto.AddressCountry = queryResult.address.Country;
+            locationDto.AddressStreet = queryResult.address.Street;
+            locationDto.AddressCity = queryResult.address.City;
+            locationDto.AddressState = queryResult.address.State;
+            locationDto.AddressPostalCode = queryResult.address.PostalCode;
             return locationDto;
         }
 
@@ -84,6 +88,10 @@ namespace AddressBook.Locations
             {
                 var locationDto = ObjectMapper.Map<Location, LocationDto>(x.location);
                 locationDto.AddressCountry = x.address.Country;
+                locationDto.AddressStreet = x.address.Street;
+                locationDto.AddressCity = x.address.City;
+                locationDto.AddressState = x.address.State;
+                locationDto.AddressPostalCode = x.address.PostalCode;
                 return locationDto;
             }).ToList();
 
@@ -117,6 +125,38 @@ namespace AddressBook.Locations
                 return sorting.Replace(
                     "addressCountry",
                     "address.Country",
+                    StringComparison.OrdinalIgnoreCase
+                );
+            }
+            if (sorting.Contains("addressStreet", StringComparison.OrdinalIgnoreCase))
+            {
+                return sorting.Replace(
+                    "addressStreet",
+                    "address.Street",
+                    StringComparison.OrdinalIgnoreCase
+                );
+            }
+            if (sorting.Contains("addressCity", StringComparison.OrdinalIgnoreCase))
+            {
+                return sorting.Replace(
+                    "addressCity",
+                    "address.City",
+                    StringComparison.OrdinalIgnoreCase
+                );
+            }
+            if (sorting.Contains("addressState", StringComparison.OrdinalIgnoreCase))
+            {
+                return sorting.Replace(
+                    "addressState",
+                    "address.State",
+                    StringComparison.OrdinalIgnoreCase
+                );
+            }
+            if (sorting.Contains("addressPostalCode", StringComparison.OrdinalIgnoreCase))
+            {
+                return sorting.Replace(
+                    "addressPostalCode",
+                    "address.PostalCode",
                     StringComparison.OrdinalIgnoreCase
                 );
             }
