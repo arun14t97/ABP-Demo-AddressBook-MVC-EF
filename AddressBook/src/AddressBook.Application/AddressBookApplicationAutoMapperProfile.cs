@@ -14,5 +14,7 @@ public class AddressBookApplicationAutoMapperProfile : Profile
         CreateMap <Location, LocationDto> ();
         CreateMap <CreateUpdateLocationDto, Location> ();
         CreateMap<Address, AddressDto>();
+        CreateMap<Address, AddressLookupDto>();
+
     }
 }

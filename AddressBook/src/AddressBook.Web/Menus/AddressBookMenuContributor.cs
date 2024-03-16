@@ -52,17 +52,19 @@ public class AddressBookMenuContributor : IMenuContributor
      new ApplicationMenuItem(
          "AddressBook",
          l["Menu:AddressBook"],
-         icon: "fa fa-book"
+         icon: "fas fa-map"
      ).AddItem(
          new ApplicationMenuItem(
              "AddressBook.Locations",
              l["Menu:Locations"],
+             icon: "fas fa-map-marker-alt",
              url: "/Locations"
          ).RequirePermissions(AddressBookPermissions.Locations.Default) // Check the permission!
      ).AddItem( // ADDED THE NEW "ADDRESS" MENU ITEM UNDER THE "ADDRESS BOOK" MENU
         new ApplicationMenuItem(
             "AddressBook.AddressF",
             l["Menu:AddressF"],
+            icon: "fas fa-home",
             url: "/AddressF"
         ).RequirePermissions(AddressBookPermissions.AddressF.Default)
     )
